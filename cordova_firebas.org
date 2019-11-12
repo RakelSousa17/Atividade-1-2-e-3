@@ -1,0 +1,171 @@
+#+Title: Usando firebase com cordova
+#+Subtitle: projeto 1, basico do firebird
+
+* preparando o ambiente de desenvolvimento
+
+   #+NAME:: preparando ambiente                  
+   #+BEGIN_SRC shell :session s1 :results output :exports both
+      #starts code
+      cd /home/wagner/wagnerdocri@gmail.com3/envs/env-dev/sources/aulas_de_cordova
+      source ../aulas_de_cordova/setup.sh 
+   #+END_SRC
+
+   #+RESULTS: : preparando ambiente
+
+   
+* Criando o projeto
+
+** Caso o projeto já exista, vou apagar pra criar de novo pra começar a aula do zero
+   #+NAME:  removendo projeto preexistente cordovacomsqlite                    
+   #+BEGIN_SRC shell :session s1 :results output :exports both
+      #starts code
+      export projetosDir=/home/wagner/wagnerdocri@gmail.com3/envs/env-dev/sources/aulas_de_cordova/projetos
+      cd $projetosDir
+      rm -rf cordovafirebase_emailauth
+      ls -l
+   #+END_SRC
+
+   #+RESULTS: removendo projeto preexistente cordovacomsqlite
+   : 
+   : [wagner@Unknown projetos]$ [wagner@Unknown projetos]$ [wagner@Unknown projetos]$ total 28
+   : drwxrwxr-x. 8 wagner wagner 4096 mar 31 13:44 cordovacomsqlite1
+   : drwxrwxr-x. 8 wagner wagner 4096 fev 18 23:00 cordova_proj1
+   : drwxrwxr-x. 8 wagner wagner 4096 mar 18 00:25 cordova_proj2_camera
+   : drwxrwxr-x. 8 wagner wagner 4096 mar 17 23:51 cordova_proj3_geo
+   : drwxrwxr-x. 8 wagner wagner 4096 mar 10 23:37 cordova_proj4_contatos
+   : drwxrwxr-x. 8 wagner wagner 4096 fev 11 23:06 jquerymob_menu
+   : drwxrwxr-x. 6 wagner wagner 4096 abr 19 18:10 webproj_firebase
+
+   
+** Criando o projeto
+
+   #+NAME:  cordova create cordovacomsqlite1 br.edu.eteczl.cordovacomsqlite1 "Cordova Com Sqlite"
+   #+BEGIN_SRC shell :session s1 :results output :exports both
+      #starts code
+      cd $projetosDir
+      cordova create cordovafirebase_emailauth br.edu.eteczl "Firebase Email Auth"
+      export projDir=$projetosDir/cordovafirebase_emailauth
+      ls -l $projDir
+   #+END_SRC
+
+   #+RESULTS: cordova create cordovacomsqlite1 br.edu.eteczl.cordovacomsqlite1 "Cordova Com Sqlite"
+   #+begin_example
+
+   [wagner@Unknown projetos]$ Creating a new cordova project.[0m
+   [wagner@Unknown projetos]$ total 28
+   -rw-rw-r--. 1 wagner wagner  989 abr 19 20:12 config.xml
+   drwxrwxr-x. 2 wagner wagner 4096 abr 19 20:12 hooks
+   -rw-rw-r--. 1 wagner wagner  371 abr 19 20:12 package.json
+   drwxrwxr-x. 2 wagner wagner 4096 abr 19 20:12 platforms
+   drwxrwxr-x. 2 wagner wagner 4096 abr 19 20:12 plugins
+   drwxrwxr-x. 4 wagner wagner 4096 abr 19 20:12 res
+   drwxrwxr-x. 5 wagner wagner 4096 abr 19 20:12 www
+   #+end_example
+
+
+* Entendendo as coisas do lado do firebase
+
+  A gente vai usar o firebase pra autenticar nossos usuarioso
+  https://firebase.google.com/docs/auth/web/email-link-auth
+
+  Pra dicionar ao firebase no seu projeto web
+  
+
+  
+* criando o projeto no firebase
+  
+  #+attr_ORG: :width 300px
+  #+attr_html: :width 800px
+  #+attr_latex: :width 800px
+/[[./imgs/firebase/f1.png]]/
+
+
+   #+attr_ORG: :width 400px
+   #+attr_html: :width 500px
+   #+attr_latex: :width 500px
+  [[./imgs/firebase/f2.png]]
+
+* firebase: Download do arquivo de configuracao
+  https://support.google.com/firebase/answer/7015592
+
+   #+attr_ORG: :width 500px
+   #+attr_html: :width 500px
+   #+attr_latex: :width 500px  
+  [[./imgs/firebase/f3.png]]
+  
+   #+attr_ORG: :width 500px
+   #+attr_html: :width 500px
+   #+attr_latex: :width 500px
+[[./imgs/firebase/f4.png]]
+
+
+* Instalando a plataformar browser pra rodar o projeto 
+  
+   #+NAME:  cordova platform add browser
+   #+BEGIN_SRC shell :session s1 :results output :exports both
+      #starts code
+      cd $projDir
+      cordova platform add browser
+      cordova run browser
+   #+END_SRC
+
+   #+RESULTS: cordova platform add browser
+   #+begin_example
+
+   [wagner@Unknown cordovafirebase_emailauth]$ Using cordova-fetch for cordova-browser@~5.0.1[0m
+   Adding browser project...[0m
+   Creating Cordova project for cordova-browser:[0m
+           Path: /home/wagner/wagnerdocri@gmail.com3/envs/env-dev/sources/aulas_de_cordova/projetos/cordovafirebase_emailauth/platforms/browser[0m
+           Name: Firebase Email Auth[0m
+   Discovered plugin "cordova-plugin-whitelist" in config.xml. Adding it to the project[0m
+   Installing "cordova-plugin-whitelist" for browser[0m
+   Adding cordova-plugin-whitelist to package.json[0m
+   Saved plugin info for "cordova-plugin-whitelist" to config.xml[0m
+   --save flag or autosave detected[0m
+   Saving browser@~5.0.4 into config.xml file ...[0m
+   #+end_example
+
+
+* firebird script carregado na aplicacao web
+
+  #+attr_html: :width 100px
+  #+attr_latex: :width 100px
+[[./imgs/firebase/f5.png]]
+
+
+* Ativiar o login via email  
+[[
+./imgs/firebase/f6.png]]
+
+
+* Criar uma conta baseada em senha
+  https://firebase.google.com/docs/auth/web/password-auth?hl=pt-br
+  
+  [[./imgs/firebase/f8.png]]
+
+[[./imgs/firebase/f7.png]]
+
+
+* Mudando um pouco nossa index.html pra inserir um usuario
+  
+  #+INCLUDE ../projetos/cordovacomsqlite1/www/index.html :src html
+
+
+* Inserindo usuarios
+    
+   #+NAME:  rodando o proj                   
+   #+BEGIN_SRC shell :session s1 :results output :exports both
+      #starts code
+      cd $projDir
+      cordova run android &
+   #+END_SRC
+
+   #+RESULTS: rodando o proj
+   : 
+   : [wagner@Unknown cordovacomsqlite1]$ [1] 3662
+
+
+
+* refs
+  https://github.com/xpbrew/cordova-sqlite-storage#readme
+
